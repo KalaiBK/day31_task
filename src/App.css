@@ -1,0 +1,55 @@
+.no-padding {
+    padding: 0 !important;
+    margin: 0 !important;
+} 
+
+.nav-bar {
+    height: 4rem;
+}
+
+.text-white {
+    color: white;
+}
+
+.sticky-sidebar {
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.img-logo {
+    height: 12rem;
+    width: 16rem;
+}
+
+.index {
+    z-index: 1;
+}
+
+.main {
+    margin-left: auto;
+    margin-top: 1rem !important;
+}
+
+.bg-color {
+    background-color: #2D3E50;
+}
+
+a {
+    text-decoration: none !important;
+    color: white !important;
+    cursor: pointer !important;
+}
+
+p {
+    margin: 0 !important;
+    padding: 0.5rem;
+}
+
+.p-selected {
+    background-color: tomato;
+}
+
+.section-top-margin {
+    margin-top: 4rem !important;
+}

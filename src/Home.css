@@ -1,0 +1,74 @@
+.headerBook{
+    background-color: #004C86;
+    color:white;
+    height: 2rem;
+}
+
+.book-tile {
+    background-color: #0073B7;
+}
+
+.book-tile-image {
+    width: 5rem;
+    height: 5rem;
+    opacity: 0.3;
+}
+
+.total-books-count {
+    color: white;
+    font-size: xx-large;
+    padding: 0 0.5rem 0 1rem;
+}
+
+.total-books-text {
+    color: white;
+    padding: 0 0.5rem 0 1rem;
+}
+
+.book-tile-footer {
+    background-color: #0068A5;
+    height: 1.5rem;
+    color: white;
+}
+
+.author-tile {
+    background-color: #F56954;
+}
+
+.author-tile-footer {
+    background-color: #DD5F4C;
+    height: 1.5rem;
+    color: white;
+}
+
+.textarea-expand {
+    resize: none;
+}
+
+.input-width {
+    width: 100%;
+}
+
+input {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.errorText {
+  color: red;
+}
+
+.custom-button {
+    background-color: #002038;
+    box-sizing: border-box;
+    color: white;
+    height: 2rem;
+    text-align: center;
+    transition: color 100ms;
+    width: 100%;
+  }
+  
+  .custom-button:hover,
+  .custom-button:focus {
+    background-color: #2D3E50;
+  }
