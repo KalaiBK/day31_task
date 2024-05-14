@@ -3,24 +3,31 @@ import { AuthorContext } from './LibraryContext'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 function Authors() {
-    const { author, updateAuthor } = useContext(AuthorContext)
-    const [selectedData, setSelectedData] = useState()
+    //To maintain the current data of book and access it throughout the app we use useContext here.
+    const { author, updateAuthor } = useContext(AuthorContext);
+    {/* to edit the existing data in library the element was accessed by id, when user clicked edit button the particular object was filtered in hadleEdit
+and set to selectedData state variable to perform update */}
+    const [selectedData, setSelectedData] = useState();
+    {/*to delete the particular element or data in author data handleDelete func used to filter the data set the remaining to author variable */}
     const handleDelete = (e) => {
         console.log(e.id);
         updateAuthor(author.filter((item) => item.id != e.id));
     }
     const handleEdit = (e) => {
-        setSelectedData(author.filter((item) => item.id == e.id)[0])
+        setSelectedData(author.filter((item) => item.id == e.id)[0]);
     }
-
+{/* to update the changes made in particular elements data handleupdate func used and splice method used to update the new changes in the element
+and the data was set to author variable  */}
     const handleUpdate = () => {
-        const updatedItems = [...author]
-        updatedItems.splice(selectedData.id, 1, selectedData)
-        updateAuthor(updatedItems)
+        const updatedItems = [...author];
+        updatedItems.splice(selectedData.id, 1, selectedData);
+        updateAuthor(updatedItems);
     }
     return (
         <div className='container-fluid p-5'>
             <div className='col-10 main'>
+                 {/*an modal was created to edit the existing data in library when user click edit icon it will popup with picked data
+                and we can edit the data in the library to make update */}
                 <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -29,6 +36,7 @@ function Authors() {
                             </div>
                             <div className="modal-body">
                                 <Formik
+                                // initials values was created to get the input from field and to validate it.
                                     initialValues={selectedData}
                                     enableReinitialize={true}
                                     validate={(values) => {
@@ -42,12 +50,14 @@ function Authors() {
                                         if (values.shortBiography.length < 40) {
                                             error.shortBiography = "Biography should contain Minimum 20 Characters"
                                         }
-                                        setSelectedData(values)
+                                        setSelectedData(values);
                                         return error;
                                     }}
                                 >
                                     {({ errors, touched }) => (
                                         <Form>
+                                             {/* to display the error message when users input was not included as per validation the error message was added for each
+                                            input field  */}
                                             <div className='py-2 px-3'>
                                                 <label htmlFor="authorName" className='pb-1'>Author</label><br />
                                                 <Field type='text' name="authorName" className={errors.authorName && touched.authorName ? "is-invalid input-width form-control" : "input-width form-control"} />
@@ -74,6 +84,7 @@ function Authors() {
                         </div>
                     </div>
                 </div>
+                {/* to display the author data's separately in list table was created */}
                 <table className='table table-striped table-bordered'>
                     <thead className='table-secondary text-center'>
                         <tr>
@@ -85,6 +96,7 @@ function Authors() {
                         </tr>
                     </thead>
                     <tbody>
+                         {/**to create the table row dynamically depend upon the data's in array map func was used */}
                         {author.map((item) => {
                             return (
                                 <tr key={item.id}>
@@ -103,4 +115,4 @@ function Authors() {
     )
 }
 
-export default Authors
+export default Authors;

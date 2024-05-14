@@ -4,15 +4,19 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import './Home.css'
 
 function Home() {
-    const { book, updateBook } = useContext(BookContext)
-    const { author, updateAuthor } = useContext(AuthorContext)
+    //To maintain the current data of book,author and access it throughout the app we use useContext here.
+    const { book, updateBook } = useContext(BookContext);
+    const { author, updateAuthor } = useContext(AuthorContext);
+    //To update the current count of book and author we use useState here.
     const [bookCount, setBookCount] = useState(0);
     const [authorCount, setAuthorCount] = useState(0);
+  //To maintain the currrent count of the book & author when the count was increased or deleted from the library data we use useEffect here.  
     useEffect(() => {
-        setBookCount(book.length)
-        setAuthorCount(author.length)
+        setBookCount(book.length);
+        setAuthorCount(author.length);
     }, [book, author]);
     return (
+        //to show the total available count of book and author two tile created with separated column and some style applied to look good
         <div className='col-10 main'>
             <div className='row'>
                 <div className='col-6'>
@@ -23,7 +27,6 @@ function Home() {
                                 <div className='col-4 d-flex justify-content-center'><img src='src\assets\Book.png' className='book-tile-image'></img></div>
                             </div>
                             <div className='book-tile-footer rounded-bottom-1 d-flex justify-content-center'>
-                                {/* View<i className="bi bi-arrow-right-circle ps-1"></i> */}
                             </div>
                         </div>
                     </div>
@@ -36,13 +39,16 @@ function Home() {
                                 <div className='col-4 d-flex justify-content-center'><img src='src\assets\Author.png' className='book-tile-image'></img></div>
                             </div>
                             <div className='author-tile-footer rounded-bottom-1 d-flex justify-content-center'>
-                                {/* View<i className="bi bi-arrow-right-circle ps-1"></i> */}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+{/* to add new book and author data into the library input field with formik validation was created for both separately with two
+splitted columns and all necessary validation was added to the form*/}
             <div className='row section-top-margin'>
+                {/* new book creating input field. */}
                 <div className='col-6'>
                     <div className='row'>
                         <div className='col-10 offset-md-1'>
@@ -51,6 +57,7 @@ function Home() {
                                     <i className="bi bi-plus-circle p-2"></i>Book
                                 </div>
                                 <Formik
+                                // initials values was created to get the input from field and to validate it.
                                     initialValues={{ bookName: '', authorName: '', isbnNumber: '', publicationDate: '' }}
                                     validate={(values) => {
                                         const error = {};
@@ -68,17 +75,20 @@ function Home() {
                                         }
                                         return error;
                                     }}
+                                    // the entered inputs was updated to the state variables dynamically by onSubmit function all operations are added to perform.
                                     onSubmit={(values, { resetForm }) => {
-                                        values.id = book.length
-                                        book.push(values)
+                                        values.id = book.length;
+                                        book.push(values);
                                         console.log(book);
-                                        updateBook(book)
-                                        setBookCount(book.length)
+                                        updateBook(book);
+                                        setBookCount(book.length);
                                         resetForm({ values: '' })
                                     }}
                                 >
                                     {({ errors, touched }) => (
                                         <Form>
+                                            {/* to display the error message when users input was not included as per validation the error message was added for each
+                                            input field  */}
                                             <div className='py-2 px-3'>
                                                 <label htmlFor="bookName" className='pb-1'>Title</label><br />
                                                 <Field type='text' name="bookName" className={errors.bookName && touched.bookName ? "is-invalid input-width form-control" : "input-width form-control"} />
@@ -110,6 +120,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
+{/* new author creating input field. */}
                 <div className='col-6'>
                     <div className='row'>
                         <div className='col-10 offset-md-1'>
@@ -118,6 +129,7 @@ function Home() {
                                     <i className="bi bi-plus-circle p-2"></i>Author
                                 </div>
                                 <Formik
+                                // initials values was created to get the input from field and to validate it.
                                     initialValues={{ authorName: '', dateOfBirth: '', shortBiography: '' }}
                                     validate={(values) => {
                                         const error = {};
@@ -132,17 +144,20 @@ function Home() {
                                         }
                                         return error;
                                     }}
+                                    // the entered inputs was updated to the state variables dynamically by onSubmit function all operations are added to perform.
                                     onSubmit={(values, { resetForm }) => {
                                         values.id = author.length;
                                         console.log(author);
-                                        author.push(values)
-                                        updateAuthor(author)
-                                        setAuthorCount(author.length)
+                                        author.push(values);
+                                        updateAuthor(author);
+                                        setAuthorCount(author.length);
                                         resetForm({ values: '' })
                                     }}
                                 >
                                     {({ errors, touched }) => (
                                         <Form>
+                                              {/* to display the error message when users input was not included as per validation the error message was added for each
+                                            input field  */}
                                             <div className='py-2 px-3'>
                                                 <label htmlFor="authorName" className='pb-1'>Author</label><br />
                                                 <Field type='text' name="authorName" className={errors.authorName && touched.authorName ? "is-invalid input-width form-control" : "input-width form-control"} />
@@ -174,4 +189,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Home;
